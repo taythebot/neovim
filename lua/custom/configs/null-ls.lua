@@ -10,7 +10,7 @@ local opts = {
     formatting.stylua,
     formatting.gofumpt,
     formatting.goimports_reviser,
-    formatting.golines,
+    formatting.golines.with({ extra_args = { "-m", "200" } }),
 
     lint.shellcheck,
   },

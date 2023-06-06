@@ -23,3 +23,7 @@ require "plugins"
 vim.o.autowrite = true
 vim.o.autoindent = true
 vim.o.confirm = true
+vim.o.shiftwidth = 4
+vim.o.smarttab = true
+vim.o.tabstop = 4
+vim.o.softtabstop = false
