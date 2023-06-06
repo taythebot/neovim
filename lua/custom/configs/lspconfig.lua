@@ -21,5 +21,9 @@ lspconfig.gopls.setup {
       }
     }
   },
-  update_in_sert = true,
+}
+
+
+vim.diagnostic.config {
+  update_in_insert = true,
 }
