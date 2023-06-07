@@ -3,11 +3,11 @@ local plugins = {
     "nvim-treesitter/nvim-treesitter",
     opts = {
       ensure_installed = {
-        -- defaults 
+        -- defaults
         "vim",
         "lua",
 
-        -- web dev 
+        -- web dev
         "html",
         "css",
         "javascript",
@@ -18,25 +18,25 @@ local plugins = {
         "svelte",
         "go",
 
-       -- low level
+        -- low level
         "c",
-       -- "zig"
+        -- "zig"
       },
     },
   },
   {
     "neovim/nvim-lspconfig",
-     config = function()
-        require "plugins.configs.lspconfig"
-        require "custom.configs.lspconfig"
-     end,
-  },
-  {
-    "jose-elias-alvarez/null-ls.nvim",
-    ft = "go",
-    opts = function()
-      return require "custom.configs.null-ls"
-    end
+    dependencies = {
+      "jose-elias-alvarez/null-ls.nvim",
+      config = function()
+        require "custom.configs.null-ls"
+      end,
+    },
+    config = function()
+      require "plugins.configs.lspconfig"
+      require "custom.configs.lspconfig"
+      require("core.utils").load_mappings "lsp"
+    end,
   },
   {
     "williamboman/mason.nvim",
@@ -46,14 +46,18 @@ local plugins = {
         "golines",
         "goimports-reviser",
         "gofumpt",
-      }
-    }
+        "lua-language-server",
+        "html-lsp",
+        "prettier",
+        "stylua",
+      },
+    },
   },
   {
     "mfussenegger/nvim-dap",
     init = function()
-      require("core.utils").load_mappings("dap")
-    end
+      require("core.utils").load_mappings "dap"
+    end,
   },
   {
     "leoluz/nvim-dap-go",
@@ -61,20 +65,32 @@ local plugins = {
     depedencies = "mfussenegger/nvim-dap",
     config = function(_, opts)
       require("dap-go").setup(opts)
-      require("core.utils").load_mappings("dap_go")
-    end
+      require("core.utils").load_mappings "dap_go"
+    end,
   },
   {
     "olexsmir/gopher.nvim",
     ft = "go",
     config = function(_, opts)
       require("gopher").setup(opts)
-      require("core.utils").load_mappings("gopher")
+      require("core.utils").load_mappings "gopher"
     end,
     build = function()
       vim.cmd [[silent!, GoInstallDeps]]
     end,
-  }
+  },
+  {
+    "nvim-treesitter/nvim-treesitter-context",
+    depedencies = "nvim-treesitter/nvim-treesitter",
+    config = function(_, opts)
+      require("treesitter-context").setup(opts)
+    end,
+    lazy = false,
+  },
+  {
+    "mbbill/undotree",
+    lazy = false,
+  },
 }
 
 return plugins

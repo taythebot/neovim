@@ -1,13 +1,13 @@
 local on_attach = require("plugins.configs.lspconfig").on_attach
 local capabilities = require("plugins.configs.lspconfig").capabilities
 
-local lspconfig = require("lspconfig")
+local lspconfig = require "lspconfig"
 local util = require "lspconfig/util"
 
 lspconfig.gopls.setup {
   on_attach = on_attach,
   capabilities = capabilities,
-  cmd = {"gopls"},
+  cmd = { "gopls" },
   filetypes = { "go", "gomod", "gowork", "gotmpl" },
   root_dir = util.root_pattern("go.work", "go.mod", ".git"),
   settings = {
@@ -18,11 +18,20 @@ lspconfig.gopls.setup {
         unusedparams = true,
         nilness = true,
         unusedvariable = true,
-      }
-    }
+      },
+    },
   },
 }
 
+lspconfig.lua_ls.setup {
+  on_attach = on_attach,
+  capabilities = capabilities,
+  settings = {
+    telemetry = {
+      enabled = false,
+    },
+  },
+}
 
 vim.diagnostic.config {
   update_in_insert = true,
