@@ -91,6 +91,13 @@ local plugins = {
     "mbbill/undotree",
     lazy = false,
   },
+  {
+    "VonHeikemen/searchbox.nvim",
+    depedencies = "MunifTanjim/nui.nvim",
+    config = function()
+      require("core.utils").load_mappings "searchbox"
+    end,
+  },
 }
 
 return plugins

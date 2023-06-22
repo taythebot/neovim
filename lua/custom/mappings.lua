@@ -85,4 +85,14 @@ M.lsp = {
   },
 }
 
+M.searchbox = {
+  plugin = true,
+  n = {
+    ["<leader>s"] = {
+      "<cmd> SearchBoxIncSearch <CR>",
+      "Search and replace in buffer",
+    },
+  },
+}
+
 return M

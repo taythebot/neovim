@@ -27,3 +27,17 @@ vim.o.shiftwidth = 4
 vim.o.smarttab = true
 vim.o.tabstop = 4
 vim.o.softtabstop = false
+
+-- Hide auto complete on space
+vim.api.nvim_create_autocmd({ 'TextChangedI' }, {
+    pattern = { '*' },
+    callback = function()
+        local cmp_config = require('cmp.config')
+        -- vim.v_char is the last character that was typed
+        if vim.v.char == ' ' then
+            cmp_config.global.completion.autocomplete = {}
+        else
+            cmp_config.global.completion.autocomplete = { 'TextChanged' }
+        end
+    end,
+})

@@ -10,7 +10,7 @@ null_ls.setup {
     formatting.stylua,
     formatting.gofumpt,
     formatting.goimports_reviser,
-    formatting.golines.with { extra_args = { "-m", "200" } },
+    formatting.golines.with { extra_args = { "-m", "200", "--no-reformat-tags" } },
 
     lint.shellcheck,
   },
